@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "29f91292-ab34-4b9c-bdee-613c42e32860",
+		"name": "全网天气预报",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "根据城市名查询天气情况",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9f6c2f84-8b8c-4427-a5e2-5f305b1fdb56",
+						"exec": [
+							"//检查返回体中是否含有一个字符串\r",
+							"pm.test(\"返回体中包含'当前可请求的次数不足' \", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"当前可请求的次数不足\");\r",
+							"});\r",
+							"\r",
+							"//检查响应体等于一个字符串\r",
+							"pm.test(\"响应体等于一个字符串'successed' \", function () {\r",
+							"    pm.response.to.have.body(\"successed\");\r",
+							"});\r",
+							"\r",
+							"//检查响应体的JSON值\r",
+							"pm.test(\"检验resultcode的值为：112\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.resultcode).to.eql('112');\r",
+							"});\r",
+							"//检查响应中包含某个header\r",
+							"pm.test(\"检验响应体中包含Connection头域\", function () {\r",
+							"    pm.response.to.have.header(\"Connection\");\r",
+							"});\r",
+							"//检查响应时间，要求小于200ms\r",
+							"pm.test(\"检查响应时间，要求小于1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"//测试要求接口响应code=200，\r",
+							"pm.test(\"接口响应code是：200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//（要求code名称当中包含某个字符串\r",
+							"pm.test(\"返回结果Status中包含“OK”字符串\", function () {\r",
+							"    pm.response.to.have.status('OK');\r",
+							"});\r",
+							"//要求Status code符合某种条件\r",
+							"pm.test(\"响应code是200、201、202中的一个\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);\r",
+							"});\r",
+							"//将XML格式的响应体转换成JSON对象\r",
+							"var jsonObject = xml2Json(responseBody);\r",
+							"//使用轻量级验证器\r",
+							"var schema = {\r",
+							"  \"items\": {\r",
+							"    resultcode:{type: \"string\"}\r",
+							"  \r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"var data1 = [true, false];\r",
+							"\r",
+							"pm.test('Schema is valid', function() {\r",
+							"  pm.expect(tv4.validate(data1, schema)).to.be.true;\r",
+							"  \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1a1725b5-212f-4a46-91cf-d6b15eb45a52",
+						"exec": [
+							"\r",
+							"//设置一个环境变量\r",
+							"pm.environment.set(\"key1\", \"value1\");\r",
+							"\r",
+							"//设置一个全局变量\r",
+							"pm.globals.set(\"key2\", \"value2\");\r",
+							"\r",
+							"//获取一个环境变量\r",
+							"pm.environment.get(\"key1\");\r",
+							"console.log(pm.environment.get(\"key1\"));\r",
+							"//获取一个全局变量\r",
+							"pm.globals.get(\"cityname\");\r",
+							"console.log(pm.globals.get(\"cityname\"));\r",
+							"//获取一个变量\r",
+							"pm.variables.get(\"gname\");\r",
+							"console.log(pm.variables.get(\"gname\"));\r",
+							"/**\r",
+							"//清除一个环境变量\r",
+							"pm.environment.unset(\"key1\");\r",
+							"console.log(pm.environment.unset(\"key1\"));\r",
+							"//清除一个全局变量\r",
+							"pm.globals.unset(\"key2\");\r",
+							"console.log(pm.globals.unset(\"key2\"));\r",
+							" \r",
+							"\r",
+							"pm.sendRequest(\"http://v.juhe.cn/weather/index?format=2&cityname=北京&key=fe2f8dfd48f85eacdbfc8b0b8916f7c6\", function (err, response) {\r",
+							"    console.log(response.json());\r",
+							"});\r",
+							"\r",
+							" **/\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?format=2&cityname=上海&key=fe2f8dfd48f85eacdbfc8b0b8916f7c6",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "2"
+						},
+						{
+							"key": "cityname",
+							"value": "上海"
+						},
+						{
+							"key": "key",
+							"value": "fe2f8dfd48f85eacdbfc8b0b8916f7c6"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
