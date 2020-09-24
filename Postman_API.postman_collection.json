@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "1a7866f4-e20f-48c2-91a2-bbd6c90d68db",
+		"name": "Postman_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "variables",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a17db146-5428-42bc-aa2e-18fbd17a07ca",
+						"exec": [
+							"",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f1600e3-a0b7-4ced-8fe8-6b2ca11e0e61",
+						"exec": [
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?user={{username}}&passwd={{passwd}}",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "{{username}}"
+						},
+						{
+							"key": "passwd",
+							"value": "{{passwd}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
